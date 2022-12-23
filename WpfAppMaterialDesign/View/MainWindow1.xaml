@@ -1,0 +1,359 @@
+﻿<Window x:Class="WpfAppMaterialDesign.View.MainWindow1"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:local="clr-namespace:WpfAppMaterialDesign.View"
+        xmlns:vm="clr-namespace:WpfAppMaterialDesign.ModelView"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      
+    mc:Ignorable="d"
+    Title="MainWindow1" Height="625" Width="1354.9"
+
+   
+
+
+    WindowStyle="None"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        Background="Transparent"
+        AllowsTransparency="True"
+        MouseDown="Window_MouseDown">
+
+
+    <Border CornerRadius="12">
+
+
+        <Border CornerRadius="10"                    
+            BorderThickness="2"
+            Opacity="0.95">
+
+            <Border.BorderBrush>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#462AD8" Offset="0"/>
+                    <GradientStop Color="#DA34AE" Offset="0.75"/>
+                    <GradientStop Color="#8A16C1" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.BorderBrush>
+
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
+                    <GradientStop Color="#060531" Offset="0"/>
+                    <GradientStop Color="#1B1448" Offset="1"/>
+
+
+
+                </LinearGradientBrush>
+
+            </Border.Background>
+
+
+
+
+
+
+            <Grid>
+                <Image Source="/Images/back-image.jpg" Opacity="0.1" Margin="-47,0,-71,-286.4"/>
+                <TextBlock Text="MOBILE OPERATOR - MO"
+                               Foreground="DarkGray"
+                               FontSize="10"
+                               FontFamily="Montserrat"
+                               Grid.Column="0"
+                               VerticalAlignment="Center"
+                               Margin="10,603,0,-0.4" Height="19"/>
+                <Image Source="/Images/Logo.png" Margin="-47,0,1224,568.6"/>
+                <TabControl x:Name="Оператор" Margin="0,0,10,-66.4">
+                    <TabItem x:Name="Клиент"  Width="168" RenderTransformOrigin="0.5,0.5">
+                        <TabItem.Header>
+                            <StackPanel  Background="#DA34AE" Orientation="Horizontal">
+                                <Ellipse Height="10" Width="10"  />
+                                <TextBlock Margin="3"><Run Text="Клиенты"/></TextBlock>
+                            </StackPanel>
+                        </TabItem.Header>
+
+                        <GroupBox x:Name="groupbox1" Header="" Grid.ColumnSpan="3" Margin="0,33,0,92.2" Width="1349" RenderTransformOrigin="0.528,0.504">
+
+                            <StackPanel Orientation="Horizontal" >
+                                <StackPanel Orientation="Horizontal" Grid.Column="1" Margin="0,0,0,0.2" Width="655">
+
+                                    <DataGrid x:Name ="DataGridView1" SelectedItem="{Binding SelectedClient}" ItemsSource="{Binding Клиентs}"  Width="545" Margin="0,45,0,49.2"  />
+                                    <TextBox Text="Введите ФИО.." Background="#DA34AE" Margin="0,0,0,429.2" x:Name="textBox1"  Width="96" TextChanged="textBox1_TextChanged" />
+                                </StackPanel>
+                                <Button  Visibility="Visible"   Foreground="Black" Style="{StaticResource MaterialDesignRaisedLightButton}" Command="{Binding Report3Command}"  x:Name="Report33Command"  Content="Найти" Margin="0,0,0,429.2" Height="Auto" Width="76"/>
+                                <Button  Visibility="Visible"  Style="{StaticResource MaterialDesignRaisedLightButton}"  x:Name="Печать"  Content="Печать" Margin="26,0,9.6,429.2" Height="Auto"  Command="{Binding Print}" Width="80" />
+                                <StackPanel Margin="0,0,0,249.2" Width="252">
+
+                                    <Button Visibility="Collapsed" x:Name="btn5" Background="#DA34AE" Foreground="Black" Margin="26,0,9.6,0">
+                                        <StackPanel Orientation="Horizontal">
+
+                                            <TextBlock Text="Редактировать клиента" Margin="0 0 10 0" Width="158"/>
+                                        </StackPanel>
+                                    </Button>
+
+                                    <Button Visibility="Visible" Command="{Binding RemoveClientCommand}" CommandParameter="{Binding SelectedClient}" x:Name="btn4" Background="#DA34AE" Foreground="Black" Margin="26,0,9.6,0" >
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock x:Name="btnSobratStatistiku" Text="Удалить клиента" Margin="0 0 10 0" Height="21" Width="101" RenderTransformOrigin="0.5,0.5">
+                                                <TextBlock.RenderTransform>
+                                                    <TransformGroup>
+                                                        <ScaleTransform/>
+                                                        <SkewTransform/>
+                                                        <RotateTransform Angle="0.348"/>
+                                                        <TranslateTransform/>
+                                                    </TransformGroup>
+                                                </TextBlock.RenderTransform>
+                                            </TextBlock>
+                                        </StackPanel>
+                                    </Button>
+
+                                    <Button  Visibility="Visible"  Style="{StaticResource MaterialDesignRaisedLightButton}"  x:Name="AddClientCommand"  Content="Добавить клиента" Margin="26,0,9.6,0" Height="33" Click="AddClientCommand_Click"/>
+
+                                    <Button Visibility="Visible" Command="{Binding BlockCommand}"  Content="Заблокированные клиенты" Background="#DA34AE" Foreground="Black" Margin="26,0,9.6,0" />
+
+                                    <Button Visibility="Visible" Command="{Binding UpdateClientCommand}" CommandParameter="{Binding SelectedClient}" x:Name="btn4_Copy" Background="#DA34AE" Foreground="Black" Margin="26,0,9.6,0" >
+                                    
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock x:Name="update" Text="Обновить клиента"   Margin="0 0 10 0" Height="22" Width="128" RenderTransformOrigin="0.5,0.5">
+                                                <TextBlock.RenderTransform>
+                                                    <TransformGroup>
+                                                        <ScaleTransform/>
+                                                        <SkewTransform/>
+                                                        <RotateTransform Angle="0.348"/>
+                                                        <TranslateTransform/>
+                                                    </TransformGroup>
+                                                </TextBlock.RenderTransform>
+                                            </TextBlock>
+                                        </StackPanel>
+                                    </Button>
+
+                                    <Button  Visibility="Visible"  CommandParameter="{Binding SelectedClient}" Style="{StaticResource MaterialDesignRaisedLightButton}"  x:Name="SpisanieCommand"  Command="{Binding SpisanieCommand}" Content="Списание" Margin="26,0,9.6,0" Height="33" />
+                                    <TextBox Background="#DA34AE" x:Name="textBox4" Text="Введите сумму списания.." Margin="26,0,10,0" Height="28" />
+                                </StackPanel>
+                                <StackPanel Background="#DA34AE" DataContext="{Binding SelectedClient}" Margin="10,10,10,9.2" Width="220">
+                                    <TextBlock Text="Выбранный элемент"  />
+                                    <TextBlock Text="Номер клиента" />
+                                    <TextBox Text="{Binding Номер_клиента, UpdateSourceTrigger=PropertyChanged}" />
+                                    <TextBlock Text="ФИО" />
+                                    <TextBox Text="{Binding ФИО, UpdateSourceTrigger=PropertyChanged}" />
+                                    <TextBlock Text="Баланс" />
+                                    <TextBox Text="{Binding Баланс, UpdateSourceTrigger=PropertyChanged}" />
+
+                                </StackPanel>
+
+                            </StackPanel>
+                        </GroupBox>
+
+
+                    </TabItem>
+                    <TabItem x:Name="tabletsTab" Width="214" Height="53" RenderTransformOrigin="0.5,0.5">
+                        <TabItem.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform Angle="0.043"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </TabItem.RenderTransform>
+                        <TabItem.Header>
+                            <StackPanel  Background="#DA34AE" Orientation="Horizontal">
+                                <Rectangle Height="10" Width="10" Fill="#DA34AE" />
+                                <TextBlock Margin="3"><Run Text="Тарифы"/></TextBlock>
+                            </StackPanel>
+
+                        </TabItem.Header>
+                        <GroupBox x:Name="groupbox10" Header="" Grid.ColumnSpan="3" Margin="0,28,0,92.2" Width="1347">
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,-35.2">
+                                <DataGrid x:Name ="DataGridView2" SelectedItem="{Binding SelectedTarif}" ItemsSource="{Binding Тариф}"  Width="645" Margin="0,40,0,94.2"  />
+                                <TextBox Text="Введите название.." Background="#DA34AE" Margin="0,0,0,464.2" x:Name="textBox2"  Width="115" />
+                                <Button  Visibility="Visible"   Foreground="Black" Style="{StaticResource MaterialDesignRaisedLightButton}" Command="{Binding Report4Command}"  x:Name="Report4Command"  Content="Найти" Margin="0,0,0,464.2" Height="Auto" Width="86"/>
+                                <StackPanel DockPanel.Dock="Top" Margin="0,0,0,244.2" Width="251">
+
+                                    <Button Visibility="Visible" x:Name="btn10" Command="{Binding RemoveTarifCommand}" CommandParameter="{Binding SelectedTarif}" Background="#DA34AE" Foreground="Black" Margin="26,0,9.6,0" Click="btn10_Click">
+                                        <StackPanel Orientation="Horizontal">
+
+                                            <TextBlock Text="Удалить тариф" Margin="0 0 10 0" Width="103" Height="34"/>
+                                        </StackPanel>
+                                    </Button>
+
+                                    <Button Visibility="Visible" Command="{Binding AddTarifCommand}"  x:Name="btn20" Background="#DA34AE" Foreground="Black" Click="btn40_Click" Margin="26,0,9.6,0">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock x:Name="btnSobratStatistiku1" Text="Добавить тариф" Margin="0 0 10 0" Height="18" Width="111" RenderTransformOrigin="0.5,0.5">
+                                                <TextBlock.RenderTransform>
+                                                    <TransformGroup>
+                                                        <ScaleTransform/>
+                                                        <SkewTransform/>
+                                                        <RotateTransform Angle="0.348"/>
+                                                        <TranslateTransform/>
+                                                    </TransformGroup>
+                                                </TextBlock.RenderTransform>
+                                            </TextBlock>
+                                        </StackPanel>
+                                    </Button>
+                                    <Button Visibility="Visible" Command="{Binding UpdateTarifCommand}" CommandParameter="{Binding SelectedTarif}"  x:Name="btn202" Background="#DA34AE" Foreground="Black" Click="btn40_Click" Margin="26,0,9.6,0">
+
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock x:Name="update1" Text="Обновить тариф" Margin="0 0 10 0" Height="18" Width="111" RenderTransformOrigin="0.5,0.5"/>
+                                        </StackPanel>
+
+                                    </Button>
+                                    <Button  Visibility="Visible"   Foreground="Black" Style="{StaticResource MaterialDesignRaisedLightButton}" Command="{Binding ReportCommand11}"  x:Name="ReportCommand11"  Content="Запрос по тарифам" Margin="26,0,10.2,0" Height="44" Click="ReportCommand11_Click" ></Button>
+
+                                </StackPanel>
+
+                                <StackPanel Background="#DA34AE" DataContext="{Binding SelectedTarif}" Margin="10,10,10,33.8" Width="217">
+                                    <TextBlock Text="Выбранный элемент"  />
+                                    <TextBlock Text="Стоимость за минуту между городами" />
+                                    <TextBox Text="{Binding Минута_межгород_стоимость, UpdateSourceTrigger=PropertyChanged}" />
+                                    <TextBlock Text="Стоимость за международную минуту" />
+                                    <TextBox Text="{Binding Минута_международная_стоимость, UpdateSourceTrigger=PropertyChanged}" />
+                                    <TextBlock Text="Название тарифа" />
+                                    <TextBox Text="{Binding Название_тарифа, UpdateSourceTrigger=PropertyChanged}" />
+                                    <TextBlock Text="Тип тарифа" />
+                                    <TextBox Text="{Binding Код_типа_тарифа_FK, UpdateSourceTrigger=PropertyChanged}" />
+                                    <TextBlock Text="Код тарифа" />
+                                    <TextBox Text="{Binding Код_тарифа, UpdateSourceTrigger=PropertyChanged}" />
+                                    <TextBlock Text="Год начала открытия" />
+                                    <TextBox Text="{Binding Год_начала, UpdateSourceTrigger=PropertyChanged}" />
+                                    <TextBlock Text="Стоимость перехода" />
+                                    <TextBox Text="{Binding Стоимость_перехода, UpdateSourceTrigger=PropertyChanged}" />
+                                </StackPanel>
+                            </StackPanel>
+                        </GroupBox>
+
+
+                    </TabItem>
+                    <TabItem x:Name="Договор"  Width="173">
+                        <TabItem.Header>
+                            <StackPanel  Background="#DA34AE" Orientation="Horizontal">
+                                <Rectangle Height="5" Width="5" Fill="#DA34AE" />
+                                <TextBlock Margin="3"><Run Text="Договора"/></TextBlock>
+                            </StackPanel>
+                        </TabItem.Header>
+                        <GroupBox x:Name="groupbox100" Header="" Grid.ColumnSpan="3" Margin="0,28,0,92.2" Width="1347">
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,-35.2">
+                                <DataGrid x:Name ="DataGridView3" SelectedItem="{Binding SelectedDogovor}" ItemsSource="{Binding Dogovor}"  Width="620" Margin="0,35,0,104.2"  />
+                                <TextBox Text="Введите номер телефона.." Background="#DA34AE" Margin="0,0,0,464.2" x:Name="textBox3"  Width="150"  />
+                                <Button  Visibility="Visible"   Foreground="Black" Style="{StaticResource MaterialDesignRaisedLightButton}" Command="{Binding Report5Command}"  x:Name="Report5Command"  Content="Найти" Margin="0,0,0,464.2" Height="Auto" Width="86"/>
+                                <StackPanel DockPanel.Dock="Top" Margin="0,0,0,244.2" Width="251">
+
+                                    <Button Visibility="Visible" x:Name="btn100" Command="{Binding RemoveDogovorCommand}" CommandParameter="{Binding SelectedDogovor}" Background="#DA34AE" Foreground="Black" Margin="26,0,9.6,0" Click="btn10_Click">
+                                        <StackPanel Orientation="Horizontal">
+
+                                            <TextBlock Text="Удалить договор" Margin="0 0 10 0" Width="114" Height="34"/>
+                                        </StackPanel>
+                                    </Button>
+
+                                    <Button Visibility="Visible" Command="{Binding AddDogovorCommand}"  x:Name="btn200" Background="#DA34AE" Foreground="Black"  Margin="26,0,9.6,0" Click="btn200_Click">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock x:Name="btnSobratStatistiku10" Text="Заключить договор" Margin="0 0 10 0" Height="16" Width="132" RenderTransformOrigin="0.5,0.5">
+                                                <TextBlock.RenderTransform>
+                                                    <TransformGroup>
+                                                        <ScaleTransform/>
+                                                        <SkewTransform/>
+                                                        <RotateTransform Angle="0.348"/>
+                                                        <TranslateTransform/>
+                                                    </TransformGroup>
+                                                </TextBlock.RenderTransform>
+                                            </TextBlock>
+                                        </StackPanel>
+                                    </Button>
+                                    <Button Visibility="Visible" Command="{Binding UpdateDogovorCommand}" CommandParameter="{Binding SelectedDogovor}"  x:Name="btn2020" Background="#DA34AE" Foreground="Black" Click="btn40_Click" Margin="26,0,9.6,0">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock x:Name="update10" Text="Изменить договор" Margin="0 0 10 0" Height="20" Width="123" RenderTransformOrigin="0.5,0.5"/>
+                                        </StackPanel>
+
+                                    </Button>
+                                    <Button  Visibility="Visible"   Foreground="Black" Style="{StaticResource MaterialDesignRaisedLightButton}" Command="{Binding ReportCommand}"  x:Name="ReportCommand1"  Content="По времени" Margin="26,0,10.2,0" Height="44" Click="ReportCommand1_Click"/>
+                                    <Button  Visibility="Visible"   Foreground="Black" Style="{StaticResource MaterialDesignRaisedLightButton}" Command="{Binding Report2Command}"  x:Name="Report21Command"  Content="Звонки" Margin="26,0,10.2,0" Height="35"/>
+                                </StackPanel>
+                                <StackPanel Background="#DA34AE" DataContext="{Binding SelectedDogovor}" Margin="10,10,10,169.2" Width="255">
+                                    <TextBlock Text="Выбранный элемент"  />
+                                    <TextBlock Text="Дата заключения]" />
+                                    <TextBox Text="{Binding Дата_заключения, UpdateSourceTrigger=PropertyChanged}" />
+                                    <TextBlock Text="Номер договора" />
+                                    <TextBox Text="{Binding Номер_договора, UpdateSourceTrigger=PropertyChanged}" />
+                                    <TextBlock Text="Номер телефона" />
+                                    <TextBox Text="{Binding Номер_телефона, UpdateSourceTrigger=PropertyChanged}" />
+                                    <TextBlock Text="Серийный номер SIM-Card" />
+                                    <TextBox Text="{Binding Серийный_номер_сим_карты, UpdateSourceTrigger=PropertyChanged}" />
+                                    <TextBlock Text="Дата_расторжения" />
+                                    <TextBox Text="{Binding Дата_расторжения, UpdateSourceTrigger=PropertyChanged}" />
+                                    <TextBlock Text="Код тарифа" />
+                                    <TextBox Text="{Binding Код_тарифа_FK, UpdateSourceTrigger=PropertyChanged}" />
+                                    <TextBlock Text="Номер клиента" />
+                                    <TextBox Text="{Binding Номер_клиента_FK, UpdateSourceTrigger=PropertyChanged}" />
+                                </StackPanel>
+                            </StackPanel>
+                        </GroupBox>
+
+                    </TabItem>
+
+
+                </TabControl>
+
+                <Button x:Name="btnClose"                          
+                            BorderThickness="0"
+                            Content="X"
+                            Foreground="White"
+                            FontSize="12"
+                            FontFamily="Montserrat"
+                            Cursor="Hand"
+                            Click="btnClose_Click" RenderTransformOrigin="0.551,0.455" Margin="1298,-53,0,518.6">
+
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="#DA34AE"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#C62DAE"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border Width="18" Height="18"
+                                        CornerRadius="9"
+                                        Background="{TemplateBinding Background}">
+                                <ContentPresenter VerticalAlignment="Center"
+                                                      HorizontalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Button x:Name="btnMinimize"                           
+                            BorderThickness="0"
+                            Content="-"
+                            Foreground="White"
+                            FontSize="16"
+                            FontFamily="Montserrat"
+                            Cursor="Hand"
+                            Click="btnMinimize_Click" RenderTransformOrigin="1.229,0.131" Margin="1253,-53,59,518.6">
+
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="#28AEED"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#278BEF"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border Width="18" Height="18"
+                                        CornerRadius="9"
+                                        Background="{TemplateBinding Background}">
+                                <ContentPresenter VerticalAlignment="Center"
+                                                      HorizontalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+
+                </Button>
+            </Grid>
+        </Border>
+    </Border>
+</Window>

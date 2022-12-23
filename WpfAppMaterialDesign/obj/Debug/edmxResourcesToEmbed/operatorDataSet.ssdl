@@ -1,0 +1,236 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище operatorDataSet" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="__MigrationHistory">
+    <Key>
+      <PropertyRef Name="MigrationId" />
+      <PropertyRef Name="ContextKey" />
+    </Key>
+    <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+    <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+    <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+  </EntityType>
+  <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "operator.dbo.Call" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+  <EntityType Name="Call">
+    <Key>
+      <PropertyRef Name="Дата_и_время" />
+      <PropertyRef Name="Длительность" />
+      <PropertyRef Name="Стоимость" />
+      <PropertyRef Name="Номер_договора_FK" />
+      <PropertyRef Name="Код_типа_звонка_FK" />
+    </Key>
+    <Property Name="Дата_и_время" Type="date" Nullable="false" />
+    <Property Name="Длительность" Type="int" Nullable="false" />
+    <Property Name="Стоимость" Type="money" Nullable="false" />
+    <Property Name="Номер_договора_FK" Type="int" Nullable="false" />
+    <Property Name="Код_типа_звонка_FK" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Dogovor">
+    <Key>
+      <PropertyRef Name="Номер_договора" />
+    </Key>
+    <Property Name="Дата_заключения" Type="date" Nullable="false" />
+    <Property Name="Номер_договора" Type="int" Nullable="false" />
+    <Property Name="Номер_телефона" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Серийный_номер_сим_карты" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Дата_расторжения" Type="date" />
+    <Property Name="Код_тарифа_FK" Type="int" Nullable="false" />
+    <Property Name="Номер_клиента_FK" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <!--Ошибки, обнаруженные при создании:
+предупреждение 6013: Первичный ключ в таблице или представлении "operator.dbo.Звонок" не определен, его не удалось вывести. Эта таблица или представление исключены. Чтобы использовать сущность, необходимо проверить схему, добавить правильные ключи и раскомментировать ее.
+        <EntityType Name="Звонок">
+          <Property Name="Дата и время" Type="date" />
+          <Property Name="Длительность" Type="int" />
+          <Property Name="Стоимость" Type="money" />
+          <Property Name="Номер договора FK" Type="int" />
+          <Property Name="Код типа звонка FK" Type="int" />
+        </EntityType>-->
+  <EntityType Name="Клиент">
+    <Key>
+      <PropertyRef Name="Номер_клиента" />
+    </Key>
+    <Property Name="Номер_клиента" Type="int" Nullable="false" />
+    <Property Name="ФИО" Type="varchar" MaxLength="50" />
+    <Property Name="Баланс" Type="money" />
+  </EntityType>
+  <EntityType Name="Тариф">
+    <Key>
+      <PropertyRef Name="Код_тарифа" />
+    </Key>
+    <Property Name="Минута_межгород_стоимость" Type="money" />
+    <Property Name="Минута_международная_стоимость" Type="money" Nullable="false" />
+    <Property Name="Название_тарифа" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Стоимость_перехода" Type="money" Nullable="false" />
+    <Property Name="Код_типа_тарифа_FK" Type="int" Nullable="false" />
+    <Property Name="Код_тарифа" Type="int" Nullable="false" />
+    <Property Name="Год_начала" Type="int" />
+  </EntityType>
+  <EntityType Name="Тип звонка">
+    <Key>
+      <PropertyRef Name="Код_типа_звонка" />
+    </Key>
+    <Property Name="Название_типа_звонка" Type="varchar" MaxLength="50" />
+    <Property Name="Код_типа_звонка" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Тип тарифа">
+    <Key>
+      <PropertyRef Name="Код_типа_тарифа" />
+    </Key>
+    <Property Name="Название_типа_тарифа" Type="varchar" MaxLength="50" />
+    <Property Name="Код_типа_тарифа" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Call_Dogovor">
+    <End Role="Dogovor" Type="Self.Dogovor" Multiplicity="1" />
+    <End Role="Call" Type="Self.Call" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Dogovor">
+        <PropertyRef Name="Номер_договора" />
+      </Principal>
+      <Dependent Role="Call">
+        <PropertyRef Name="Номер_договора_FK" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Call_Тип звонка">
+    <End Role="Тип звонка" Type="Self.Тип звонка" Multiplicity="1" />
+    <End Role="Call" Type="Self.Call" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Тип звонка">
+        <PropertyRef Name="Код_типа_звонка" />
+      </Principal>
+      <Dependent Role="Call">
+        <PropertyRef Name="Код_типа_звонка_FK" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Договор_Клиент">
+    <End Role="Клиент" Type="Self.Клиент" Multiplicity="1" />
+    <End Role="Dogovor" Type="Self.Dogovor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Клиент">
+        <PropertyRef Name="Номер_клиента" />
+      </Principal>
+      <Dependent Role="Dogovor">
+        <PropertyRef Name="Номер_клиента_FK" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Договор_Тариф">
+    <End Role="Тариф" Type="Self.Тариф" Multiplicity="1" />
+    <End Role="Dogovor" Type="Self.Dogovor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Тариф">
+        <PropertyRef Name="Код_тарифа" />
+      </Principal>
+      <Dependent Role="Dogovor">
+        <PropertyRef Name="Код_тарифа_FK" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <!--Ошибки, обнаруженные при создании:
+ошибка 6004: Невозможно найти таблицу "operator.dbo.Звонок", на которую ссылается связь.
+        <Association Name="FK_Звонок_Тип звонка" />-->
+  <!--Ошибки, обнаруженные при создании:
+ошибка 6004: Невозможно найти таблицу "operator.dbo.Звонок", на которую ссылается связь.
+        <Association Name="FK_Звонок_Тип звонка1" />-->
+  <Association Name="FK_Тариф_Тип тарифа">
+    <End Role="Тип тарифа" Type="Self.Тип тарифа" Multiplicity="1" />
+    <End Role="Тариф" Type="Self.Тариф" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Тип тарифа">
+        <PropertyRef Name="Код_типа_тарифа" />
+      </Principal>
+      <Dependent Role="Тариф">
+        <PropertyRef Name="Код_типа_тарифа_FK" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+  <Function Name="procedd8" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="start" Type="datetime" Mode="In" />
+    <Parameter Name="end" Type="datetime" Mode="In" />
+  </Function>
+  <Function Name="procedd81" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="kod" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <EntityContainer Name="Хранилище operatorDataSetContainer">
+    <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Dogovor" EntityType="Self.Dogovor" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Клиент" EntityType="Self.Клиент" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Тариф" EntityType="Self.Тариф" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Тип звонка" EntityType="Self.Тип звонка" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Тип тарифа" EntityType="Self.Тип тарифа" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Call" EntityType="Self.Call" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Call].[Дата_и_время] AS [Дата_и_время], 
+    [Call].[Длительность] AS [Длительность], 
+    [Call].[Стоимость] AS [Стоимость], 
+    [Call].[Номер_договора_FK] AS [Номер_договора_FK], 
+    [Call].[Код_типа_звонка_FK] AS [Код_типа_звонка_FK]
+    FROM [dbo].[Call] AS [Call]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_Call_Dogovor" Association="Self.FK_Call_Dogovor">
+      <End Role="Dogovor" EntitySet="Dogovor" />
+      <End Role="Call" EntitySet="Call" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Call_Тип звонка" Association="Self.FK_Call_Тип звонка">
+      <End Role="Тип звонка" EntitySet="Тип звонка" />
+      <End Role="Call" EntitySet="Call" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Договор_Клиент" Association="Self.FK_Договор_Клиент">
+      <End Role="Клиент" EntitySet="Клиент" />
+      <End Role="Dogovor" EntitySet="Dogovor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Договор_Тариф" Association="Self.FK_Договор_Тариф">
+      <End Role="Тариф" EntitySet="Тариф" />
+      <End Role="Dogovor" EntitySet="Dogovor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Тариф_Тип тарифа" Association="Self.FK_Тариф_Тип тарифа">
+      <End Role="Тип тарифа" EntitySet="Тип тарифа" />
+      <End Role="Тариф" EntitySet="Тариф" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

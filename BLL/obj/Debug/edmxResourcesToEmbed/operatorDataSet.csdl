@@ -1,0 +1,182 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="operatorModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="C__MigrationHistory">
+    <Key>
+      <PropertyRef Name="MigrationId" />
+      <PropertyRef Name="ContextKey" />
+    </Key>
+    <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+    <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Dogovor">
+    <Key>
+      <PropertyRef Name="Номер_договора" />
+    </Key>
+    <Property Name="Дата_заключения" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Номер_договора" Type="Int32" Nullable="false" />
+    <Property Name="Номер_телефона" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Серийный_номер_сим_карты" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Дата_расторжения" Type="DateTime" Precision="0" />
+    <Property Name="Код_тарифа_FK" Type="Int32" Nullable="false" />
+    <Property Name="Номер_клиента_FK" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Клиент" Relationship="Self.FK_Договор_Клиент" FromRole="Dogovor" ToRole="Клиент" />
+    <NavigationProperty Name="Тариф" Relationship="Self.FK_Договор_Тариф" FromRole="Dogovor" ToRole="Тариф" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Клиент">
+    <Key>
+      <PropertyRef Name="Номер_клиента" />
+    </Key>
+    <Property Name="Номер_клиента" Type="Int32" Nullable="false" />
+    <Property Name="ФИО" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Баланс" Type="Decimal" Precision="19" Scale="4" />
+    <NavigationProperty Name="Dogovor" Relationship="Self.FK_Договор_Клиент" FromRole="Клиент" ToRole="Dogovor" />
+  </EntityType>
+  <EntityType Name="Тариф">
+    <Key>
+      <PropertyRef Name="Код_тарифа" />
+    </Key>
+    <Property Name="Минута_межгород_стоимость" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Минута_международная_стоимость" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="Название_тарифа" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Стоимость_перехода" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="Код_типа_тарифа_FK" Type="Int32" Nullable="false" />
+    <Property Name="Код_тарифа" Type="Int32" Nullable="false" />
+    <Property Name="Год_начала" Type="Int32" />
+    <NavigationProperty Name="Dogovor" Relationship="Self.FK_Договор_Тариф" FromRole="Тариф" ToRole="Dogovor" />
+    <NavigationProperty Name="Тип_тарифа" Relationship="Self.FK_Тариф_Тип_тарифа" FromRole="Тариф" ToRole="Тип_тарифа" />
+  </EntityType>
+  <EntityType Name="Тип_звонка">
+    <Key>
+      <PropertyRef Name="Код_типа_звонка" />
+    </Key>
+    <Property Name="Название_типа_звонка" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Код_типа_звонка" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Тип_тарифа">
+    <Key>
+      <PropertyRef Name="Код_типа_тарифа" />
+    </Key>
+    <Property Name="Название_типа_тарифа" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Код_типа_тарифа" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Тариф" Relationship="Self.FK_Тариф_Тип_тарифа" FromRole="Тип_тарифа" ToRole="Тариф" />
+  </EntityType>
+  <Association Name="FK_Договор_Клиент">
+    <End Role="Клиент" Type="Self.Клиент" Multiplicity="1" />
+    <End Role="Dogovor" Type="Self.Dogovor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Клиент">
+        <PropertyRef Name="Номер_клиента" />
+      </Principal>
+      <Dependent Role="Dogovor">
+        <PropertyRef Name="Номер_клиента_FK" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Договор_Тариф">
+    <End Role="Тариф" Type="Self.Тариф" Multiplicity="1" />
+    <End Role="Dogovor" Type="Self.Dogovor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Тариф">
+        <PropertyRef Name="Код_тарифа" />
+      </Principal>
+      <Dependent Role="Dogovor">
+        <PropertyRef Name="Код_тарифа_FK" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Тариф_Тип_тарифа">
+    <End Role="Тип_тарифа" Type="Self.Тип_тарифа" Multiplicity="1" />
+    <End Role="Тариф" Type="Self.Тариф" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Тип_тарифа">
+        <PropertyRef Name="Код_типа_тарифа" />
+      </Principal>
+      <Dependent Role="Тариф">
+        <PropertyRef Name="Код_типа_тарифа_FK" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
+    <EntitySet Name="Dogovor" EntityType="Self.Dogovor" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <EntitySet Name="Клиент" EntityType="Self.Клиент" />
+    <EntitySet Name="Тариф" EntityType="Self.Тариф" />
+    <EntitySet Name="Тип_звонка" EntityType="Self.Тип_звонка" />
+    <EntitySet Name="Тип_тарифа" EntityType="Self.Тип_тарифа" />
+    <AssociationSet Name="FK_Договор_Клиент" Association="Self.FK_Договор_Клиент">
+      <End Role="Клиент" EntitySet="Клиент" />
+      <End Role="Dogovor" EntitySet="Dogovor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Договор_Тариф" Association="Self.FK_Договор_Тариф">
+      <End Role="Тариф" EntitySet="Тариф" />
+      <End Role="Dogovor" EntitySet="Dogovor" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Тариф_Тип_тарифа" Association="Self.FK_Тариф_Тип_тарифа">
+      <End Role="Тип_тарифа" EntitySet="Тип_тарифа" />
+      <End Role="Тариф" EntitySet="Тариф" />
+    </AssociationSet>
+    <FunctionImport Name="procedd8" ReturnType="Collection(operatorModel.procedd8_Result)">
+      <Parameter Name="start" Mode="In" Type="DateTime" />
+      <Parameter Name="end" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(operatorModel.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(operatorModel.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+  </EntityContainer>
+  <ComplexType Name="procedd8_Result">
+    <Property Type="Int32" Name="Код_тарифа_FK" Nullable="false" />
+    <Property Type="DateTime" Name="Дата_заключения" Nullable="false" />
+    <Property Type="String" Name="Номер_телефона" Nullable="false" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+</Schema>

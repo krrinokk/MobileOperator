@@ -1,0 +1,13 @@
+D:\Курсач\WpfAppMaterialDesign\BLL\bin\Debug\BLL.dll
+D:\Курсач\WpfAppMaterialDesign\BLL\bin\Debug\BLL.pdb
+D:\Курсач\WpfAppMaterialDesign\BLL\bin\Debug\DAL.dll
+D:\Курсач\WpfAppMaterialDesign\BLL\bin\Debug\EntityFramework.dll
+D:\Курсач\WpfAppMaterialDesign\BLL\bin\Debug\DAL.pdb
+D:\Курсач\WpfAppMaterialDesign\BLL\bin\Debug\DAL.dll.config
+D:\Курсач\WpfAppMaterialDesign\BLL\bin\Debug\EntityFramework.xml
+D:\Курсач\WpfAppMaterialDesign\BLL\bin\Debug\ru\EntityFramework.resources.dll
+D:\Курсач\WpfAppMaterialDesign\BLL\obj\Debug\ModelView.csprojAssemblyReference.cache
+D:\Курсач\WpfAppMaterialDesign\BLL\obj\Debug\ModelView.csproj.CoreCompileInputs.cache
+D:\Курсач\WpfAppMaterialDesign\BLL\obj\Debug\ModelView.csproj.CopyComplete
+D:\Курсач\WpfAppMaterialDesign\BLL\obj\Debug\BLL.dll
+D:\Курсач\WpfAppMaterialDesign\BLL\obj\Debug\BLL.pdb

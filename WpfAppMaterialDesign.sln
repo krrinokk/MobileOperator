@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30717.126
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfAppMaterialDesign", "WpfAppMaterialDesign\WpfAppMaterialDesign.csproj", "{4E88FAA0-FDE8-417A-99A8-ADA4CC1DBA47}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2B948519-BC2D-4278-B2AD-687C78CE567D}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\Users\Lenovo\Downloads\ModernLoginUI-WPF-main\WPF-LoginForm\Images\key-icon.png = ..\..\..\Users\Lenovo\Downloads\ModernLoginUI-WPF-main\WPF-LoginForm\Images\key-icon.png
+		DAL\Models\Model1.cs = DAL\Models\Model1.cs
+		..\..\Users\Lenovo\Downloads\pngtree-glossy-home-button-png-image_2255209.jpg = ..\..\Users\Lenovo\Downloads\pngtree-glossy-home-button-png-image_2255209.jpg
+		..\..\..\Users\Lenovo\Downloads\save.png = ..\..\..\Users\Lenovo\Downloads\save.png
+		..\..\..\Users\Lenovo\Downloads\ModernLoginUI-WPF-main\WPF-LoginForm\Images\user-icon.png = ..\..\..\Users\Lenovo\Downloads\ModernLoginUI-WPF-main\WPF-LoginForm\Images\user-icon.png
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BLL", "BLL\BLL.csproj", "{8D09B2EC-382E-4C04-8B76-5C30CA116974}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{02642DB6-2EBA-4459-B7D3-B4DC2B0E6249}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4E88FAA0-FDE8-417A-99A8-ADA4CC1DBA47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E88FAA0-FDE8-417A-99A8-ADA4CC1DBA47}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E88FAA0-FDE8-417A-99A8-ADA4CC1DBA47}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E88FAA0-FDE8-417A-99A8-ADA4CC1DBA47}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D09B2EC-382E-4C04-8B76-5C30CA116974}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D09B2EC-382E-4C04-8B76-5C30CA116974}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D09B2EC-382E-4C04-8B76-5C30CA116974}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D09B2EC-382E-4C04-8B76-5C30CA116974}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02642DB6-2EBA-4459-B7D3-B4DC2B0E6249}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02642DB6-2EBA-4459-B7D3-B4DC2B0E6249}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02642DB6-2EBA-4459-B7D3-B4DC2B0E6249}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02642DB6-2EBA-4459-B7D3-B4DC2B0E6249}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {01D68955-D72F-4E6F-AA83-4A8A8BADA607}
+	EndGlobalSection
+EndGlobal

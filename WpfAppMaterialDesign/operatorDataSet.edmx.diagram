@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="35a6999c26724009958d83f63a361b52" Name="Diagram1">
+        <EntityTypeShape EntityType="operatorDataSet.C__MigrationHistory" Width="1.5" PointX="7.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="operatorDataSet.Dogovor" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="operatorDataSet.sysdiagrams" Width="1.5" PointX="7.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="operatorDataSet.Клиент" Width="1.5" PointX="3" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="operatorDataSet.Тариф" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="operatorDataSet.Тип_звонка" Width="1.5" PointX="5.25" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="operatorDataSet.Тип_тарифа" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="operatorDataSet.Call" Width="1.5" PointX="7.5" PointY="1.25" IsExpanded="true" />
+        <AssociationConnector Association="operatorDataSet.FK_Call_Dogovor" ManuallyRouted="false" />
+        <AssociationConnector Association="operatorDataSet.FK_Договор_Клиент" ManuallyRouted="false" />
+        <AssociationConnector Association="operatorDataSet.FK_Договор_Тариф" ManuallyRouted="false" />
+        <AssociationConnector Association="operatorDataSet.FK_Тариф_Тип_тарифа" ManuallyRouted="false" />
+        <AssociationConnector Association="operatorDataSet.FK_Call_Тип_звонка" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,141 @@
+﻿<Window x:Class="WpfAppMaterialDesign.View.Window5"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfAppMaterialDesign"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+    Title="MainWindow" Height="450" Width="800"
+    WindowStyle="None"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        Background="Transparent"
+        AllowsTransparency="True">
+    <Border CornerRadius="12" Margin="0,0,0,94.6">
+        <Border.Background>
+            <ImageBrush ImageSource="/Images/back-image.jpg"
+                        Stretch="None"/>
+        </Border.Background>
+
+        <Border CornerRadius="10" Name="Border"                
+            BorderThickness="2"
+            Opacity="0.95" Margin="0,0,0,0.2">
+
+            <Border.BorderBrush>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#462AD8" Offset="0"/>
+                    <GradientStop Color="#DA34AE" Offset="0.75"/>
+                    <GradientStop Color="#8A16C1" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.BorderBrush>
+
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
+                    <GradientStop Color="#060531" Offset="0"/>
+                    <GradientStop Color="#1B1448" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+
+
+
+
+
+
+            <Grid RenderTransformOrigin="0.513,0.294">
+
+                <Image Source="/Images/Logo.png" Margin="-12,0,713.8,289"/>
+                <TextBlock Text="MOBILE OPERATOR - MO"
+                               Foreground="DarkGray"
+                               FontSize="10"
+                               FontFamily="Montserrat"
+                               Grid.Column="0"
+                               VerticalAlignment="Center"
+                               Margin="68,23,-0.2,244" Height="85"/>
+                <Button x:Name="btnClose"                          
+                            BorderThickness="0"
+                            Content="X"
+                            Foreground="White"
+                            FontSize="12"
+                            FontFamily="Montserrat"
+                            Cursor="Hand"
+                            Click="btnClose_Click" RenderTransformOrigin="0.551,0.455" Margin="753,0,-0.2,314">
+
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="#DA34AE"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#C62DAE"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border Width="18" Height="18"
+                                        CornerRadius="9"
+                                        Background="{TemplateBinding Background}">
+                                <ContentPresenter VerticalAlignment="Center"
+                                                      HorizontalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Button x:Name="btnMinimize"                           
+                            BorderThickness="0"
+                            Content="-"
+                            Foreground="White"
+                            FontSize="16"
+                            FontFamily="Montserrat"
+                            Cursor="Hand"
+                            Click="btnMinimize_Click" RenderTransformOrigin="1.229,0.131" Margin="703,0,26.8,314">
+
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="#28AEED"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#278BEF"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Width="18" Height="18"
+                                        CornerRadius="9"
+                                        Background="{TemplateBinding Background}">
+                                <ContentPresenter VerticalAlignment="Center"
+                                                      HorizontalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+
+                </Button>
+              
+                    <materialDesign:Card Name="Card"
+                                   
+    Width="Auto"
+  Padding="19" Margin="68,43,73.8,10">
+                
+                        
+                </materialDesign:Card>
+                <Button Visibility="Visible" Command="{Binding ReportCommand}" Content="Найти"  x:Name="btn4_Copy" Background="#DA34AE" Foreground="Black" Margin="318,101,348.8,219" />
+                <Button  Visibility="Visible"   Foreground="Black" Style="{StaticResource MaterialDesignRaisedLightButton}" Command="{Binding Print}"  x:Name="print2Command1"  Content="Печать" Margin="318,138,348.8,179" Height="35"/>
+
+                <Grid Name="PrintGrid" Margin="-12,0,-0.2,0">
+                    <DataGrid HorizontalAlignment="Left" Name="dataGrid5" ItemsSource="{Binding Dogovors}" Height="140" Margin="104,178,0,0" VerticalAlignment="Top" Width="580"/>
+                    <TextBlock Text="Для создания отчета выберите временные промежутки:" Margin="228,67,9.8,244" />
+                <TextBlock Text="Начальный промежуток:" Margin="104,134,552.8,200" />
+                <DatePicker Name="dateTimePicker1"  HorizontalAlignment="Left" Margin="128,98,0,0" VerticalAlignment="Top" Width="100"/>
+                <TextBlock Text="Конечный промежуток:" Margin="528,134,9.8,200" />
+                <DatePicker Name="dateTimePicker2" HorizontalAlignment="Left" Margin="538,98,0,0" VerticalAlignment="Top" Width="100"/>
+              
+            </Grid>
+                </Grid>
+        </Border>
+    </Border>
+</Window>
